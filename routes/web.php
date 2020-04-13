@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//test路由
+Route::get('/test','TestController@test');
+//Login路由
+Route::any('/login','LoginController@login');
+//接收验证值
+Route::any('/ver','LoginController@ver');
+//后台首页路由
+Route::get('/admin','LoginController@admin');
