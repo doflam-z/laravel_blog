@@ -17,8 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//test路由
-Route::get('/test','TestController@test');
+/*//test路由
+Route::get('/test','TestController@test');*/
+
 //Login路由
 Route::any('/login','LoginController@login');
 //接收验证值

@@ -18,7 +18,7 @@ class LoginController extends Controller
 //           dd("登陆成功");
            return redirect("/admin");
        }else{
-           dd("登陆失败");
+           dd("登陆失败，用户名或密码错误！");
        }
     }
 
