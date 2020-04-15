@@ -20,9 +20,12 @@ Route::get('/', function () {
 /*//test路由
 Route::get('/test','TestController@test');*/
 
-//Login路由
+//Login
 Route::any('/login','LoginController@login');
 //接收验证值
 Route::any('/ver','LoginController@ver');
-//后台首页路由
-Route::get('/admin','LoginController@admin');
+
+//后台首页
+Route::get('/admin','Admin\AdminController@admin');
+//后台修改文章
+Route::get('/admin/article/edit','Admin\AdminController@article_edit');
