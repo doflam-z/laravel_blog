@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="content">
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow position-fixed">
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow position-relative">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0 px-3" href="#" style="color: #eaeaea;font-size: 1.4rem;padding: 0.5rem 0;">Z Blog</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Enter Search" aria-label="Search">
         <ul class="navbar-nav px-3">
@@ -30,7 +30,7 @@
     </nav>
     <div class="container-fluid w-100 h-100" style="padding: 0">
         <div class="row w-100 h-100 m-0">
-            <nav class="nav flex-column col-md-2 d-none d-md-block pt-4 pr-0 w-100 h-100" style="background-color: #343a40;">
+            <nav class="nav flex-column col-md-2 d-none d-md-block pt-4 pr-0 w-100 p-100 " style="background-color: #343a40;">
                 <a class="nav-link nav-left" href="/admin"><span class="icon-home">&nbsp&nbsp文章管理</span></a>
                 <a class="nav-link nav-left" href="/admin/comment"><span class="icon-bubbles3">&nbsp&nbsp评论管理</span></a>
                 <a class="nav-link nav-left" href="/admin/cate"><span class="icon-menu">&nbsp&nbsp分类管理</span></a>
@@ -39,8 +39,8 @@
                 <a class="nav-link nav-left" href="/admin/recycle"><span class="icon-bin2">&nbsp&nbsp回收站</span></a>
                 {{--                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
             </nav>
-            <div class="col-md-8  w-100 px-4">
-                <div class="main w-100">
+            <div class="col-md-8  w-100 h-100 px-4">
+                <div class="main w-100 h-100">
                     <div class="main-content px-3 ">
                         @yield('main_content')
                     </div>
@@ -73,7 +73,7 @@
                 <div class="article_list">
                     <span style="border-left: 10px solid #4141AA;padding-left: 5px"><small>最近文章</small></span>
                         @foreach($article_list as $value)
-                            <li class="list-group-item border-0 p-1"><small><a href="/article/read/?id={{$value->id}}">{{$value->article_title}}</a></small></li>
+                            <li class="list-group-item border-0 p-1"><small><a href="">{{$value->article_title}}</a></small></li>
                         @endforeach
 
                 </div>

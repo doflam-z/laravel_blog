@@ -53,18 +53,19 @@
 <form action="/article/add" method="POST">
     <div id="nav" style="height: 40px">
         <span style="line-height: 40px;position: relative;left: 20px;color: #57555f;"><a  href="/admin">返回管理</a>&nbsp;&nbsp;&nbsp;标题<span class="icon-arrow-right"></span>
-            <input style="width:1500px;height:30px;border-radius: 6px;font-size: 18px;" type="text" name="article_title" value="<?php /*echo $title*/?>">
-            <button class="button button1" type="submit" name="<?php /*echo $sub*/?>publish" value="publish">发布文章</button>
+            <input style="width:1500px;height:30px;border-radius: 6px;font-size: 18px;" type="text" name="article_title" value="{{$article_title}}">
+            <input type="hidden" name="id" value="{{$id}}">
+            <button class="button button1" type="submit" name="publish" value="{{$sub}}">发布文章</button>
             <button class="button button2" type="submit" name="save" value="save">保存</button>
             <select name="category" style="color: #0e0e0e;padding: 2px 4px;border-radius: 6px">
-                @foreach($data as $value)
+                @foreach($cate_list as $value)
                    <option  value='{{$value->cate_name}}'>{{$value->cate_name}}</option>
                 @endforeach
             </select>
         </span>
     </div>
     <div id="test-editor">
-        <textarea style="display:none;" name="mark"><?php /*echo $content*/?></textarea>
+        <textarea style="display:none;" name="mark">{{$article_content}}</textarea>
         <textarea class="editormd-html-textarea" name="post"></textarea>
     </div>
 </form>

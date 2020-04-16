@@ -49,6 +49,8 @@ Route::group(['prefix' =>'article'],function () {
     Route::any('/edit', 'Admin\ArticleController@article_edit');
     //查看文章
     Route::get('/read', 'Admin\ArticleController@article_read');
+    //删除文章
+    Route::get('/delete', 'Admin\ArticleController@article_delete');
 });
 //markdown
 Route::get('/markdown','Markdown\MarkdownController@markdown');
