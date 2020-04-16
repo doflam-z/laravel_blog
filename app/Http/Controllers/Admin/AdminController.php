@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 //引用的模块
 use App\Admin\User;
 use App\Admin\Article;
+use App\Admin\Draft;
+use App\Admin\Category;
 
 class AdminController extends Controller
 {
@@ -17,9 +19,7 @@ class AdminController extends Controller
 
         return view('/admin/index',compact(['data','article_list']));
     }
-    //修改文章
-    public function article_edit(Request $request){
-        $request->id;
-    }
+
+
 
 }

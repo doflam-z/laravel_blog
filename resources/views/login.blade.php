@@ -26,7 +26,7 @@
 <div class="container-fluid" style="position: relative;height: 100%">
     <div class="row justify-content-center align-items-center" style="height: 100%;">
         <div class="login col-auto border rounded">
-        <form action="/ver" method="post">
+        <form action="/login/ver" method="post">
             <h3 class="row" style="background-color: #313131;padding: 20px;color: #fff;">Login</h3>
             <div class="form-group">
                 <label for="exampleInputEmail1">User name</label>
