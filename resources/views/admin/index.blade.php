@@ -1,7 +1,7 @@
 {{--后台主页--}}
 @extends('admin/public')
 @section('main_content')
-    <h3>文章管理</h3>
+    <h3 class="border-bottom pb-3">文章管理</h3>
 @foreach($data as $value)
     <div class='box_content px-2 py-4 border-bottom'><h5><a href='/article/edit/?id={{$value->id}}'>{{$value->article_title}}</a></h5>
         <div class='pt-3'>

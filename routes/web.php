@@ -33,12 +33,19 @@ Route::group(['prefix' =>'admin'],function (){
     Route::get('/comment','Admin\AdminController@comment');
     //管理分类
     Route::get('/cate','Admin\AdminController@cate');
+    //新建分类
+    Route::get('/cate_add','Admin\AdminController@cate_add');
+    //保存分类
+    Route::post('/cate_save','Admin\AdminController@cate_save');
+    //删除分类
+    Route::get('/cate_delete','Admin\AdminController@cate_delete');
     //管理用户
     Route::get('/user','Admin\AdminController@user');
     //管理草稿箱
     Route::get('/draft','Admin\AdminController@draft');
     //管理回收站
     Route::get('/recycle','Admin\AdminController@recycle');
+
 });
 
 //文章路由群组
@@ -54,4 +61,9 @@ Route::group(['prefix' =>'article'],function () {
 });
 //markdown
 Route::get('/markdown','Markdown\MarkdownController@markdown');
+
+//删除评论
+Route::get('/comment/delete','Admin\AdminController@comment_delete');
+//发表评论
+Route::post('/comment/add','Admin\AdminController@comment_add');
 

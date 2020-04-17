@@ -16,24 +16,19 @@ class Article extends Model
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
     //查看文章
-    public function article_select($request){
-        $data=$this->where('id','=',"$request->id")->select(['article_title','article_content'])->get();
+    public function article_select($id,$field){
+        $data=$this->where('id','=',"$id")->select($field)->get();
         return $data;
     }
-/*    //输出文章到markdown编辑器
-    public function article_edit($request){
-        $data=$this->where('id','=',"$request->id")->select(['article_content','article_title'])->get();
-        return $data;
-    }*/
 
     //发布、修改文章
     public function article_add($request){
         $time=time();
         $article_content = $request->mark;
         $article_content = $this->articleChang($article_content);
-        if ($request->publish='edit'){
+        if ($request->publish =='edit'){
             $result= $this-> where('id','=',"$request->id")->update(['article_title' => "$request->article_title", 'article_content' => "$article_content", 'cate_name' => "$request->category", 'article_time' => "$time"]);
-        }elseif ($request->publish='publish') {
+        }elseif ($request->publish =='publish') {
             $result = $this->insert(['article_title' => "$request->article_title", 'article_content' => "$article_content", 'cate_name' => "$request->category", 'article_time' => "$time"]);
         }
         return $result;
