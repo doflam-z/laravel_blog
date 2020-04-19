@@ -15,7 +15,7 @@ class Article extends Model
     protected $fillable=['id','cate_name','article_editor','article_content','article_views','comment_num','article_time','article_title'];
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-    //查看文章
+/*    //查看文章
     public function article_select($id,$field){
         $data=$this->where('id','=',"$id")->select($field)->get();
         return $data;
@@ -46,5 +46,5 @@ class Article extends Model
         $patterns= "/\'/";
         $keywords="\'";
         return $str=preg_replace($patterns,$keywords,$article_content);
-    }
+    }*/
 }

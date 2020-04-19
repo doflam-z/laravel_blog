@@ -56,7 +56,7 @@
             <input style="width:1500px;height:30px;border-radius: 6px;font-size: 18px;" type="text" name="article_title" value="{{$article_title}}">
             <input type="hidden" name="id" value="{{$id}}">
             <button class="button button1" type="submit" name="publish" value="{{$sub}}">发布文章</button>
-            <button class="button button2" type="submit" name="save" value="save">保存</button>
+            <button class="button button2" type="submit" name="save" value="{{$sub}}">保存</button>
             <select name="category" style="color: #0e0e0e;padding: 2px 4px;border-radius: 6px">
                 @foreach($cate_list as $value)
                    <option  value='{{$value->cate_name}}'>{{$value->cate_name}}</option>

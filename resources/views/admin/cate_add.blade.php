@@ -9,8 +9,8 @@
                 <input type="text" value="{{$cate_name}}" name="cate_name" class="form-control" placeholder="输入名称">
             </div>
         </div>
-            <button class="btn btn-primary mt-2" name="cate_sub" value="{{$cate_sub_value}}">{{$cate_sub_name}}</button>
-            <input name="id" type="hidden" value="{{$id}}">
+        <button class="btn btn-primary mt-2" name="cate_sub" value="{{$cate_sub_value}}">{{$cate_sub_name}}</button>
+        <input name="id" type="hidden" value="{{$id}}">
     </form>
 @endsection
 

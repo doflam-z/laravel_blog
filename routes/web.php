@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 //test路由
-//Route::get('/test','Admin\AdminController@test');
+Route::get('/test','Admin\AdminController@info');
 
 //Login
 Route::any('/login','LoginController@login');
@@ -29,6 +29,8 @@ Route::any('/login/ver','LoginController@ver');
 Route::group(['prefix' =>'admin'],function (){
     //后台首页
     Route::get('/','Admin\AdminController@admin');
+    //文章管理
+    Route::get('/article','Admin\AdminController@article');
     //管理评论
     Route::get('/comment','Admin\AdminController@comment');
     //管理分类
@@ -41,10 +43,18 @@ Route::group(['prefix' =>'admin'],function (){
     Route::get('/cate_delete','Admin\AdminController@cate_delete');
     //管理用户
     Route::get('/user','Admin\AdminController@user');
+    //新增用户
+    Route::get('/user_add','Admin\AdminController@user_add');
+    //保存用户
+    Route::post('/user_save','Admin\AdminController@user_save');
+    //删除用户
+    Route::get('/user_delete','Admin\AdminController@user_delete');
     //管理草稿箱
     Route::get('/draft','Admin\AdminController@draft');
     //管理回收站
     Route::get('/recycle','Admin\AdminController@recycle');
+    //搜索结果页面
+    Route::post('/search','Admin\AdminController@search');
 
 });
 
@@ -66,4 +76,6 @@ Route::get('/markdown','Markdown\MarkdownController@markdown');
 Route::get('/comment/delete','Admin\AdminController@comment_delete');
 //发表评论
 Route::post('/comment/add','Admin\AdminController@comment_add');
+
+
 
