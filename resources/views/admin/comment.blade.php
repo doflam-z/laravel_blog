@@ -7,7 +7,7 @@
             <div class='pt-3'>
                 <small><span class='span icon-clock2'>{{date('Y年m月d日',$value->comment_time)}}</span></small>
                 <div class='manage_button float-right'>
-                    <a class="button_read" href="/article/read/?id={{$value->article_id}}">前往</a> | <a class="button_delete" href="/comment/delete/?id={{$value->id}}" style="color: #e9322d">删除</a>
+                    <a class="cheak" href="#page={{$value->article_id}} " >前往</a> | <a class="button_delete" href="/comment/delete/?id={{$value->id}}" style="color: #e9322d">删除</a>
                 </div>
             </div>
         </div>

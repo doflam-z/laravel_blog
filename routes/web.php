@@ -65,7 +65,7 @@ Route::group(['prefix' =>'article'],function () {
     //修改文章
     Route::any('/edit', 'Admin\ArticleController@article_edit');
     //查看文章
-    Route::get('/read', 'Admin\ArticleController@article_read');
+    Route::any('/read', 'Admin\ArticleController@article_read');
     //删除文章
     Route::get('/delete', 'Admin\ArticleController@article_delete');
 });

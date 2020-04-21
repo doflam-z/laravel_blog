@@ -49,10 +49,10 @@ class AdminController extends Controller
 //        $field=['article_title'];
         $data=Comment::get();
 //        foreach ($data as $request)
-//        $article_list=$this->list();
-//        $info=$this->info();
-        return view('/admin/comment',compact(['data']));
-//        return view('/admin/comment',compact(['data','article_list','info']));
+        $article_list=$this->list();
+        $info=$this->info();
+//        return view('/admin/comment',compact(['data']));
+        return view('/admin/comment',compact(['data','article_list','info']));
     }
 
     //发表评论
@@ -60,7 +60,7 @@ class AdminController extends Controller
         $time=time();
         $result=Comment::insert(['comment_content'=>"$request->comment_content",'article_id'=>"$request->article_id",'comment_time'=>"$time"]);
         if($result > 0){
-            return back();
+            return redirect("/admin#page=2");
         }
     }
 
@@ -162,13 +162,13 @@ class AdminController extends Controller
             if ($request->user_passwd == $request->user_passwd_confirm){
                 $result = User::insert(['user_name' => "$request->user_name",'user_passwd' => "$user_passwd",'user_type' => "$request->user_type"]);
                 if ($result > 0) {
-                    return redirect('/admin/user');
+                    return redirect('/admin');
                 }
             }else{dd('两次输入的密码不一致！');}
         }elseif ($request->user_sub =='user_edit'){
             $result = User::where('id','=',"$request->id")->update(['user_name' => "$request->user_name",'user_passwd' => "$request->user_passwd",'user_type' => "$request->user_type"]);
             if ($result > 0) {
-                return redirect('/admin/user');
+                return redirect('/admin');
             }
         }
     }

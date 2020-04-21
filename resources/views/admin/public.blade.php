@@ -11,59 +11,34 @@
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".admin_article").click(function(){
-                $('.main-content').load('/admin/article');
-            })
-            $(".admin_comment").click(function(){
-                $('.main-content').load('/admin/comment');
-            })
-            $(".admin_cate").click(function(){
-                $('.main-content').load('/admin/cate');
-            })
-            $(".admin_user").click(function(){
-                $('.main-content').load('/admin/user');
-            })
-            $(".admin_draft").click(function(){
-                $('.main-content').load('/admin/draft');
-            })
-            $(".cheak").click(function(){
-                var $url=$(".cheak").attr("name");
-                $.get($url,function(data,status){
-                    $('.main-content').text(data);
-                });
-            });
-        })
-    </script>
+    <script src="/js/ajax.js"></script>
 
     <title>Z_Blog</title>
 </head>
 <body>
 {{--<div class="content">--}}
-<form action="/admin/search" method="post">
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0 pl-4" href="/admin" style="color: #eaeaea;font-size: 1.3rem;padding: 0.4rem 0;">Z Blog</a>
-        <input class="form-control form-control-dark w-100" type="text" name="search_content" placeholder="Enter Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="/article/edit"><span class="icon-pencil2">&nbsp;写博客</span></a>
-            </li>
-        </ul>
-    </nav>
-</form>
+    <form action="/admin/search" method="post">
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0 pl-4" href="/admin" style="color: #eaeaea;font-size: 1.3rem;padding: 0.4rem 0;">Z Blog</a>
+            <input class="form-control form-control-dark w-100" type="text" name="search_content" placeholder="Enter Search" aria-label="Search">
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="/article/edit"><span class="icon-pencil2">&nbsp;写博客</span></a>
+                </li>
+            </ul>
+        </nav>
+    </form>
     <div class="container-fluid wh" >
         <div class="row wh">
             <nav class="col-md-2 d-none d-md-block sidebar px-0 wh">
                 <div class="sidebar-sticky col-md-2 wh" style="padding: 44px 0 0 0;position: fixed">
                     <ul class="nav flex-column wh pt-4 pl-4"style="background-color: #343a40;">
-                        <li class="nav-item"><a class="nav-link nav-left admin_article" href="#"><span class="icon-home">&nbsp&nbsp文章管理</span></a></li>
-                        <li class="nav-item"><a class="nav-link nav-left admin_comment" href="#"><span class="icon-bubbles3">&nbsp&nbsp评论管理</span></a></li>
-{{--                        <li class="nav-item"><a class="nav-link nav-left" href="/admin/comment"><span class="icon-bubbles3">&nbsp&nbsp评论管理</span></a></li>--}}
-                        <li class="nav-item"><a class="nav-link nav-left admin_cate" href="#"><span class="icon-menu">&nbsp&nbsp分类管理</span></a></li>
-                        <li class="nav-item"><a class="nav-link nav-left admin_user" href="#"><span class="icon-users">&nbsp&nbsp用户管理</span></a></li>
-                        <li class="nav-item"><a class="nav-link nav-left admin_draft" href="#"><span class="icon-bin">&nbsp&nbsp草稿箱</span></a></li>
-                        <li class="nav-item"><a class="nav-link nav-left" href="#"><span class="icon-bin2">&nbsp&nbsp回收站</span></a></li>
+                        <li class="nav-item"><a class="nav-link nav-left admin_article" href="#page=1"><span class="icon-home">&nbsp&nbsp文章管理</span></a></li>
+                        <li class="nav-item"><a class="nav-link nav-left admin_comment" href="#page=2"><span class="icon-bubbles3">&nbsp&nbsp评论管理</span></a></li>
+                        <li class="nav-item"><a class="nav-link nav-left admin_cate" href="#page=3"><span class="icon-menu">&nbsp&nbsp分类管理</span></a></li>
+                        <li class="nav-item"><a class="nav-link nav-left admin_user" href="#page=4"><span class="icon-users">&nbsp&nbsp用户管理</span></a></li>
+                        <li class="nav-item"><a class="nav-link nav-left admin_draft" href="#page=5"><span class="icon-bin">&nbsp&nbsp草稿箱</span></a></li>
+                        <li class="nav-item"><a class="nav-link nav-left" href="#page=6"><span class="icon-bin2">&nbsp&nbsp回收站</span></a></li>
                         {{--                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
                     </ul>
                 </div>

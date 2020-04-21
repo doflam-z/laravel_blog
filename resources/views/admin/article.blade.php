@@ -1,6 +1,6 @@
 {{--文章页面--}}
-@extends('admin/public')
-@section('main_content')
+{{--@extends('admin/public')--}}
+{{--@section('main_content')--}}
 {{--    <h3>{{$article_title}}</h3>--}}
     <div class="article_content">
         {{print_r($article_content)}}
@@ -19,4 +19,4 @@
             <span class="icon-user-tie">用户</span> <b style="color: #645FF7">{{$value->username}}</b> <small style="color: #95908C">{{date('Y年m月d号 H:i:s',$value->comment_time)}}</small> : {{$value->comment_content}}
         </div>
     @endforeach
-@endsection
+{{--@endsection--}}
