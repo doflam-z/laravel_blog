@@ -1,18 +1,13 @@
-{{--文章页面--}}
+{{--查看文章页面--}}
 {{--@extends('admin/public')--}}
 {{--@section('main_content')--}}
-{{--    <h3>{{$article_title}}</h3>--}}
     <div class="article_content">
         {{print_r($article_content)}}
-    </div>
-    <div class="comment_content">
-
     </div>
     <form action="/comment/add" method="post">
         <textarea class="form-control" rows="3" name="comment_content"></textarea>
         <button class="btn btn-primary mt-2" name="comment_sub" type="submit" value="">评论</button>
         <input name="article_id" type="hidden" value="{{$id}}">
-{{--        <input name="username" type="hidden" value="{{$username}}">--}}
     </form>
     @foreach($comment as $value)
         <div class="py-3 border-bottom">

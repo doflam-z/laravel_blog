@@ -11,7 +11,5 @@
             </div>
         </div>
     @endforeach
-    <form action="/admin/cate_add" method="get">
-        <button class="btn btn-primary mt-2" href="#">新建</button>
-    </form>
+        <button class="btn btn-primary mt-2" href="#page=cate_add">新建</button>
 {{--@endsection--}}

@@ -14,46 +14,77 @@ use App\Admin\Comment;
 class AdminController extends Controller
 {
 
-    //最近文章列表
-    public function list(){
-        $article_list=Article::select(['id','article_title'])->limit(6)->get();
-        return $article_list;
-    }
+    //-----------------以下为测试部分-----------------------------
 
-    //网站信息栏
-    public function info(){
-        $articles=Article::select(['id'])->count();
-        $article_views=Article::sum('article_views');
-        $article_comments=Comment::select(['id'])->count();
-        $users=User::select(['id'])->count();
-        $info=array('articles'=>"$articles",'article_views'=>"$article_views",'article_comments'=>"$article_comments",'users'=>"$users");
-        return $info;
-    }
+    //-------------------以上为测试部分----------------------------
 
     //后台首页
-    public function admin(){
+    public function admin(Request $request){
+        if ($request->ajax) {
+        $total = Article::count();
+        $page = new Page($total, $listRows = 6, $query = "", $ord = true);
         $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
-        $article_list=$this->list();
-        $info=$this->info();
-        return view('/admin/index',compact(['data','article_list','info']));
+        $fpage=$page->fpage(5);
+        return view('/admin/index', compact(['data', 'fpage']));
+        }else{
+            return $this->public_page();
+        }
     }
-    //文章管理页面
-    public function article(){
+/*    //文章管理页面
+    public function article(Request $request){
+        if ($request->ajax) {
+        $total = Article::count();
+        $page = new Page($total, $listRows = 6, $query = "", $ord = true);
         $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
-        return view('/admin/article_mana',compact(['data']));
-    }
+        $fpage=$page->fpage(5);
+        return view('/admin/article_mana', compact(['data', 'fpage']));
+        }else{
+            return $this->public_page();
+        }
+    }*/
 
     //评论管理
-    public function comment(){
-//        $article=new Article();
-//        $field=['article_title'];
-        $data=Comment::get();
-//        foreach ($data as $request)
-        $article_list=$this->list();
-        $info=$this->info();
-//        return view('/admin/comment',compact(['data']));
-        return view('/admin/comment',compact(['data','article_list','info']));
+    public function comment(Request $request){
+        if ($request->ajax) {
+            $data = Comment::get();
+            return view('/admin/comment', compact(['data']));
+        }else{
+            return $this->public_page();
+        }
     }
+
+    //分类管理
+    public function cate(Request $request){
+        if ($request->ajax) {
+            $data=Category::get();
+            return view('/admin/cate',compact(['data']));
+        }else{
+            return $this->public_page();
+        }
+    }
+
+    //用户管理
+    public function user(Request $request){
+        if ($request->ajax) {
+            $data=User::get();
+            return view('/admin/user',compact(['data']));
+        }else{
+            return $this->public_page();
+        }
+    }
+
+    //草稿管理
+    public function draft(Request $request){
+        if ($request->ajax) {
+            $data=Draft::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
+            return view('/admin/draft',compact(['data']));
+        }else{
+            return $this->public_page();
+        }
+    }
+
+//------以上为导航管理模块---------
+//------以下为功能模块------------
 
     //发表评论
     public function comment_add(Request $request){
@@ -72,14 +103,6 @@ class AdminController extends Controller
         }else{dd('删除失败');}
     }
 
-    //分类管理
-    public function cate(){
-        $data=Category::get();
-//        $article_list=$this->list();
-//        $info=$this->info();
-        return view('/admin/cate',compact(['data']));
-//        return view('/admin/cate',compact(['data','info','article_list']));
-    }
 
     //新增、修改分类页面
     public function cate_add(Request $request){
@@ -96,10 +119,10 @@ class AdminController extends Controller
             $cate_sub_value='cate_add';
             $id="";
         }
-        $article_list=$this->list();
-        $info=$this->info();
-//        return view('/admin/cate_add',compact(['cate_name','cate_sub_name','cate_sub_value','id']));
-        return view('/admin/cate_add',compact(['article_list','info','cate_name','cate_sub_name','cate_sub_value','id']));
+//        $article_list=$this->list();
+//        $info=$this->info();
+        return view('/admin/cate_add',compact(['cate_name','cate_sub_name','cate_sub_value','id']));
+//        return view('/admin/cate_add',compact(['article_list','info','cate_name','cate_sub_name','cate_sub_value','id']));
     }
 
     //保存、修改分类方法
@@ -123,15 +146,6 @@ class AdminController extends Controller
         if ($result > 0 ){
             return back();
         }else{dd('删除失败');}
-    }
-
-    //用户管理
-    public function user(){
-        $data=User::get();
-//        $article_list=$this->list();
-//        $info=$this->info();
-        return view('/admin/user',compact(['data']));
-//        return view('/admin/user',compact(['data','article_list','info']));
     }
 
     //新增、修改用户页面
@@ -181,22 +195,41 @@ class AdminController extends Controller
         }else{dd('删除失败');}
     }
 
-    //草稿管理
-    public function draft(){
-        $data=Draft::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
-//        $article_list=$this->list();
-//        $info=$this->info();
-        return view('/admin/draft',compact(['data']));
-//        return view('/admin/draft',compact(['data','article_list','info']));
-    }
-
     //搜索
     public function search(Request $request){
+        if ($request->search_content == ""){
+            return "搜索词不能为空！";
+        }
         $str=trim($request->search_content);
-        $data=Article::where('article_title','like',"%$str%")->select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
+        $data=Article::where('article_title','like',"%$str%")->select(['id','article_title','article_editor','article_time','comment_num','article_views'])->get();
         $article_list=$this->list();
         $info=$this->info();
 //        return view('/admin/search',compact(['data','str']));
-        return view('/admin/search',compact(['data','article_list','info','str']));
+        return view('/admin/search',compact(['data','str','article_list','info']));
+    }
+
+    //最近文章列表
+    public function list(){
+        $article_list=Article::select(['id','article_title'])->limit(6)->get();
+        $list="";
+        foreach($article_list as $value) {
+            $list.="<li class='list-group-item border-0 p-1'> <small><a class='cheak' href='=/article/read?id=$value->id'> $value->article_title </a></small> </li >";
+        }
+        return $list;
+    }
+
+    //网站信息栏
+    public function info(){
+        $articles=Article::select(['id'])->count();
+        $article_views=Article::sum('article_views');
+        $article_comments=Comment::select(['id'])->count();
+        $users=User::select(['id'])->count();
+        $info=array('articles'=>"$articles",'article_views'=>"$article_views",'article_comments'=>"$article_comments",'users'=>"$users");
+        return "<tr><td>{$info['articles']}</td><td>{$info['article_views']}</td><td>{$info['article_comments']}</td><td>{$info['users']}</td></tr>";
+    }
+
+    //返回公共页面
+    public function public_page(){
+        return view('/admin/public');
     }
 }

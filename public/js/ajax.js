@@ -1,5 +1,6 @@
-//解决AJAX浏览器返回功能失效问题
+//解决AJAX浏览器返回功能失效hash方法
 
+/*
 //获取指定key的hash值
 function getHash(key, url) {
     var hash;
@@ -26,26 +27,32 @@ function loadPanel() {
     if (page == null && location.pathname == '/admin') {
         $(".main-content").load("/admin/article");
     }
-    if (page == 1) {
+    if (page == 'article') {
         $(".main-content").load("/admin/article");
     }
-    if (page == 2) {
+    if (page == 'comment') {
         $(".main-content").load("/admin/comment");
     }
-    if (page == 3) {
+    if (page == 'cate') {
         $(".main-content").load("/admin/cate");
     }
-    if (page == 4) {
+    if (page == 'user') {
         $(".main-content").load("/admin/user");
     }
-    if (page == 5) {
+    if (page == 'draft') {
         $(".main-content").load("/admin/draft");
     }
-    if (page == 6) {
+    if (page == 'article') {
         $(".main-content").load("/admin/article");
     }
-    if (page > 10) {
+    if ( page > 0) {
         url= "/article/read?id="+page;
+        $.get(url,function(data,status){
+            $(".main-content").html(data);
+        });
+    }
+    if (page == 'cate_add') {
+        url= "/admin/cate_add";
         $.get(url,function(data,status){
             $(".main-content").html(data);
         });
@@ -53,4 +60,10 @@ function loadPanel() {
 }
 $(window).bind("hashchange", loadPanel);
 
-$(loadPanel);
+$(loadPanel);*/
+
+//----------------------------------------以上为hash方法----------------------------------------------------------
+
+//----------------------------------------以下为History API方法---------------------------------------------------
+
+

@@ -1,6 +1,6 @@
 {{--新建、修改分类页面--}}
-@extends('admin/public')
-@section('main_content')
+{{--@extends('admin/public')--}}
+{{--@section('main_content')--}}
     <h3 class="border-bottom pb-3">分类专栏</h3>
     <form action="/admin/cate_save" method="post">
         <div class='px-2 py-4 border-bottom'>
@@ -12,5 +12,5 @@
         <button class="btn btn-primary mt-2" name="cate_sub" value="{{$cate_sub_value}}">{{$cate_sub_name}}</button>
         <input name="id" type="hidden" value="{{$id}}">
     </form>
-@endsection
+{{--@endsection--}}
 

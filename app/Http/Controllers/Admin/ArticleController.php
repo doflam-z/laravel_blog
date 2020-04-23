@@ -33,8 +33,6 @@ class ArticleController extends Controller
         $article_content=$parser->makeHtml($text);
         $article_title=$value->article_title;
         $comment=Comment::where('article_id','=',"$id")->get();
-//        $article_list=Article::select(['id','article_title'])->limit(6)->get();
-//        $info=$admin->info();
         return view('/admin/article',compact(['article_title','article_content','comment','id']));
     }
     //发布、保存文章方法
@@ -49,7 +47,7 @@ class ArticleController extends Controller
                 $result = Article::insert(['article_title' => "$request->article_title", 'article_content' => "$article_content", 'cate_name' => "$request->category", 'article_time' => "$time"]);
             }
             if ($result > 0){
-                return redirect('/admin/article');
+                return redirect('/admin');
             }else{dd('保存失败');}
         }elseif (isset($request->save)){
             if ($request->save =='edit'){

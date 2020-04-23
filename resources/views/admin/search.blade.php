@@ -9,11 +9,10 @@
                 <small><span class='span icon-eye'><small>{{$value->article_views}}</small></span></small>
                 <small><span class='span icon-bubble2'><small>{{$value->comment_num}}</small></span></small>
                 <div class='manage_button float-right'>
-                    <a href="/article/read/?id={{$value->id}}">查看</a> | <a href="/article/delete/?id={{$value->id}}" style="color: #e9322d">删除</a>
+                    <a class="cheak" href="#page={{$value->id}} " >查看</a> | <a href="/article/delete/?id={{$value->id}}" style="color: #e9322d">删除</a>
                 </div>
             </div>
         </div>
     @endforeach
-    <div class="mt-4">{{$data->links()}}</div>
 
 @endsection
