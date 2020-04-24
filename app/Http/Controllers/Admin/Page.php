@@ -156,7 +156,7 @@ namespace App\Http\Controllers\Admin;
 		/* 在对象内部使用的私有方法，用于获取上一页和首页的操作信息 */
 		private function firstprev(){
 			if($this->page > 1) {
-				$str = "&nbsp;<a style='text-decoration: none;color: #0e0e0e' href='javascript:setPage(\"{$this->uri}page=1\")'>{$this->config["first"]}</a>";
+				$str = "&nbsp;<a style='text-decoration: none;color: #0e0e0e' href='{$this->uri}page=1'>{$this->config["first"]}</a>";
 				$str .= "<a style='color: #0e0e0e' href='{$this->uri}page=".($this->page-1)."'>{$this->config["prev"]}</a>&nbsp;";
 				return $str;
 			}
@@ -173,7 +173,7 @@ namespace App\Http\Controllers\Admin;
 				$page = $this->page-$i;
 
 				if($page >= 1)
-					$linkPage .= "<a style='border-radius: 4px;padding:7px 8px;border: solid 1px #0e0e0e;color: #0e0e0e;text-decoration: none;' href='javascript:setPage(\"{$this->uri}page={$page}\")'>{$page}</a>&nbsp;";
+					$linkPage .= "<a style='border-radius: 4px;padding:7px 8px;border: solid 1px #0e0e0e;color: #0e0e0e;text-decoration: none;' href='{$this->uri}page={$page}'>{$page}</a>&nbsp;";
 			}
 			/*当前页的信息 */
 			if($this->pageNum > 1)
@@ -183,7 +183,7 @@ namespace App\Http\Controllers\Admin;
 			for($i=1; $i <= $inum; $i++){
 				$page = $this->page+$i;
 				if($page <= $this->pageNum)
-					$linkPage .= "<a style='border-radius: 4px;padding:7px 8px;border: solid 1px #0e0e0e;color: #0e0e0e;text-decoration: none;' href='javascript:setPage(\"{$this->uri}page={$page}\")'>{$page}</a>&nbsp;";
+					$linkPage .= "<a style='border-radius: 4px;padding:7px 8px;border: solid 1px #0e0e0e;color: #0e0e0e;text-decoration: none;' href='{$this->uri}page={$page}'>{$page}</a>&nbsp;";
 				else
 					break;
 			}
@@ -194,7 +194,7 @@ namespace App\Http\Controllers\Admin;
 		/* 在对象内部使用的私有方法，获取下一页和尾页的操作信息 */
 		private function nextlast(){
 			if($this->page != $this->pageNum) {
-				$str = "<a style='padding:4px 8px;border: solid 1px #0e0e0e;border-radius: 4px;color: #0e0e0e;text-decoration: none;' href='javascript:setPage(\"{$this->uri}page=".($this->page+1)."\")'>{$this->config["next"]}</a>&nbsp;";
+				$str = "<a style='padding:4px 8px;border: solid 1px #0e0e0e;border-radius: 4px;color: #0e0e0e;text-decoration: none;' href='{$this->uri}page=".($this->page+1)."'>{$this->config["next"]}</a>&nbsp;";
 //				$str .= "&nbsp;<a style='color: #0e0e0e' href='{$this->uri}page=".($this->pageNum)."'>{$this->config["last"]}</a>&nbsp;";
 				return $str;
 			}

@@ -13,55 +13,6 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/ajax.js"></script>
 
-    <script>
-        //ajax分页
-        function setPage(url) {
-            // let link = url.split('?').pop();
-            $.post(url,{ajax:"1"},function(data){
-                $('.main-content').html(data);
-            });
-        }
-        // setPage('/admin/article?page=1');
-    </script>
-
-    <script>
-        //History API
-        $(document).ready(function(){
-
-            function anchorClick(link) {
-                // var linkSplit = link.split('/').pop();
-                $.post(link, {ajax:"1"}, function(data) {
-                    $('.main-content').html(data);
-                });
-            }
-
-            $('.ajax').on('click', 'a', function(e) {
-                window.history.pushState(null, null, $(this).attr('href'));
-                anchorClick($(this).attr('href'));
-                e.preventDefault();
-                event.stopPropagation()
-            });
-
-            window.addEventListener('popstate', function(e) {
-                anchorClick(location.pathname);
-            });
-        });
-    </script>
-
-    <script>
-        //加载页面公共部分
-        $(document).ready(function () {
-            $(".info").load("/info");
-            $(".article_list").load("/list");
-
-            let url=location.pathname;
-             // if (url != '/admin') {
-                $.post(url, {ajax: "1"}, function (data) {
-                    $(".main-content").html(data);
-                })
-             // }
-        })
-    </script>
 
     <title>Z_Blog</title>
 </head>
@@ -81,25 +32,25 @@
         <div class="row wh">
             <nav class="ajax col-md-2 d-none d-md-block sidebar px-0 wh">
                 <div class="sidebar-sticky col-md-2 wh" style="padding: 44px 0 0 0;position: fixed">
-                    <ul class="nav flex-column wh pt-4 pl-4"style="background-color: #343a40;">
+                    <ul class="nav flex-column wh pt-4"style="background-color: #343a40;">
                         <li class="nav-item"><a class="nav-link nav-left admin_article" href="/admin"><span class="icon-home">&nbsp&nbsp文章管理</span></a></li>
                         <li class="nav-item"><a class="nav-link nav-left admin_comment" href="/admin/comment"><span class="icon-bubbles3">&nbsp&nbsp评论管理</span></a></li>
                         <li class="nav-item"><a class="nav-link nav-left admin_cate" href="/admin/cate"><span class="icon-menu">&nbsp&nbsp分类管理</span></a></li>
                         <li class="nav-item"><a class="nav-link nav-left admin_user" href="/admin/user"><span class="icon-users">&nbsp&nbsp用户管理</span></a></li>
                         <li class="nav-item"><a class="nav-link nav-left admin_draft" href="/admin/draft"><span class="icon-bin">&nbsp&nbsp草稿箱</span></a></li>
-                        <li class="nav-item"><a class="nav-link nav-left" href="#page=6"><span class="icon-bin2">&nbsp&nbsp回收站</span></a></li>
+{{--                        <li class="nav-item"><a class="nav-link nav-left" href="#"><span class="icon-bin2">&nbsp&nbsp回收站</span></a></li>--}}
                         {{--                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
                     </ul>
                 </div>
             </nav>
             <div class="col-md-8 px-4" style="padding-top: 48px;">
                 <div class="main h-100">
-                    <div class="main-content px-3 border-right h-100">
+                    <div class="main-content px-3 border-right h-100 ajax">
                         @yield('main_content')
                     </div>
                 </div>
             </div>
-            <div class="flex-column col-md-2 d-none d-md-block w-100 h-100  pt-3">
+            <div class="ajax flex-column col-md-2 d-none d-md-block w-100 h-100  pt-3">
                 <div class="pt-5" style="position: fixed">
                     <div class="user w-100 h-25 mt-5">
                         <img src="/image/头像.jpg" alt="">

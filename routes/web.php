@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 //test路由
 Route::any('/test','Admin\AdminController@test');
-Route::any('page1','Admin\AdminController@page1');
+Route::any('/page1','Admin\AdminController@page1');
 Route::any('/page2','Admin\AdminController@page2');
 Route::any('/page3','Admin\AdminController@page3');
 //------------------------------------------------------------------
@@ -40,15 +40,15 @@ Route::group(['prefix' =>'admin'],function (){
     //管理分类
     Route::any('/cate','Admin\AdminController@cate');
     //新建分类
-    Route::get('/cate_add','Admin\AdminController@cate_add');
+    Route::any('/cate_add','Admin\AdminController@cate_add');
     //保存分类
     Route::post('/cate_save','Admin\AdminController@cate_save');
     //删除分类
-    Route::get('/cate_delete','Admin\AdminController@cate_delete');
+    Route::any('/cate_delete','Admin\AdminController@cate_delete');
     //管理用户
     Route::any('/user','Admin\AdminController@user');
     //新增用户
-    Route::get('/user_add','Admin\AdminController@user_add');
+    Route::any('/user_add','Admin\AdminController@user_add');
     //保存用户
     Route::post('/user_save','Admin\AdminController@user_save');
     //删除用户

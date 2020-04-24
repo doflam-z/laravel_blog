@@ -19,6 +19,7 @@ class ArticleController extends Controller
 
     //查看文章详情
     public function article_read(Request $request){
+        if ($request->ajax) {
         $field=['article_title','article_content'];
         $id=$request->id;
         if ($request->table == "Draft"){
@@ -34,6 +35,9 @@ class ArticleController extends Controller
         $article_title=$value->article_title;
         $comment=Comment::where('article_id','=',"$id")->get();
         return view('/admin/article',compact(['article_title','article_content','comment','id']));
+        }else{
+            return $this->public_page();
+        }
     }
     //发布、保存文章方法
     public function article_add(Request $request){
@@ -88,13 +92,11 @@ class ArticleController extends Controller
 
     //删除文章
     public function article_delete(Request $request){
-//        $data=$this->article_delete($request);
         $data= Article::where('id','=',"$request->id")->delete();
         if ($data > 0) {
-            return back();
-        }else{dd('删除失败');}
+            return redirect('/admin');
+        }else{return false;}
     }
-
 
     //转化引号
     function articleChang($article_content)
@@ -104,4 +106,8 @@ class ArticleController extends Controller
         return $str=preg_replace($patterns,$keywords,$article_content);
     }
 
+    //返回公共页面
+    public function public_page(){
+        return view('/admin/public');
+    }
 }

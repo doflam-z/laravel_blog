@@ -1,6 +1,6 @@
 {{--新建、修改用户页面--}}
-@extends('admin/public')
-@section('main_content')
+{{--@extends('admin/public')--}}
+{{--@section('main_content')--}}
     <h3 class="border-bottom pb-3">用户管理</h3>
     <form action="/admin/user_save" method="post">
         <div class='px-2 py-2 row'>
@@ -34,6 +34,6 @@
         </div>
         <input name="id" type="hidden" value="{{$id}}">
     </form>
-@endsection
+{{--@endsection--}}
 
 

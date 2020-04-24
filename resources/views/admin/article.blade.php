@@ -2,7 +2,7 @@
 {{--@extends('admin/public')--}}
 {{--@section('main_content')--}}
     <div class="article_content">
-        {{print_r($article_content)}}
+        {!! $article_content !!}
     </div>
     <form action="/comment/add" method="post">
         <textarea class="form-control" rows="3" name="comment_content"></textarea>

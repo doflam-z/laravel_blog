@@ -6,10 +6,10 @@
         <div class='comment_all px-2 py-4 border-bottom'><h5> <span class="icon-menu">  {{$value->cate_name}}</span></h5>
             <div class='pt-3'>
                 <div class='manage_button float-right'>
-                    <a class="button_read" href="/admin/cate_add/?id={{$value->id}}">编辑</a> | <a class="button_delete" href="/admin/cate_delete/?id={{$value->id}}" style="color: #e9322d">删除</a>
+                    <a class="button_read" href="/admin/cate_add?id={{$value->id}}">编辑</a> | <a class="button_delete" href="/admin/cate_delete?id={{$value->id}}" onclick="javascript:stop_ajax();" style="color: #e9322d">删除</a>
                 </div>
             </div>
         </div>
     @endforeach
-        <button class="btn btn-primary mt-2" href="#page=cate_add">新建</button>
+        <a class="btn btn-primary mt-2" href="/admin/cate_add">新建</a>
 {{--@endsection--}}
