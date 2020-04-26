@@ -13,20 +13,5 @@ class User extends Model
     public $timestamps=false;
     //设置允许写入的字段
     protected $fillable=['id','user_name','user_passwd','user_email','user_type'];
-    //新增
-/*    public function add(){
 
-    }
-    //查询
-    public function select(){
-
-    }
-    //修改
-    public function update(){
-
-    }
-    //删除
-    public function delete(){
-
-    }*/
 }

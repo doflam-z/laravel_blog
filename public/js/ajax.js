@@ -93,12 +93,7 @@ $(document).ready(function(){
     stop_ajax = function(){
         $(".ajax").off("click","a");
     }
-    /*
-        page_url= function(url) {
-            window.history.pushState(null, null, url);
-            anchorClick(url);
-        };
-    */
+
 });
 
 /*----------------------------------------以上为History API方法---------------------------------------------------*/

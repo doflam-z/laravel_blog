@@ -1,15 +1,20 @@
+{{--
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-{{--    <link rel="stylesheet" type="text/css" href="/css/style.css">--}}
+--}}
+{{--    <link rel="stylesheet" type="text/css" href="/css/style.css">--}}{{--
+
     <link rel="stylesheet" type="text/css" href="/css/font.css">
 
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-{{--    <script src="/js/ajax.js"></script>--}}
+--}}
+{{--    <script src="/js/ajax.js"></script>--}}{{--
+
 
 
     <title>Z_Blog</title>
@@ -17,6 +22,7 @@
 
 <body>
 
+--}}
 {{--<section id='container'>
     <noscript>
         ... ...
@@ -38,7 +44,8 @@
         <input type="text" name="test1post">
         <input type="submit" value="submit">
     </form>
-</div>--}}
+</div>--}}{{--
+
 
 <script>
     $(document).ready(function(){
@@ -83,10 +90,13 @@
 
 <!-- 分页 -->
 <div class="ajax page ajax-page">
-{{--    {{ $data->render() }}--}}
+--}}
+{{--    {{ $data->render() }}--}}{{--
+
     <div class="mt-4">{{$data->links()}}</div>
 </div>
 
+--}}
 {{--<script>
     $('.ajax-page .pagination').find('a').each(function(e){
         let page=$(this).attr('href').split('?')[1];
@@ -103,8 +113,23 @@
             $('div.content').html(data);
         })
     }
-</script>--}}
+</script>--}}{{--
 
 
+
+</body>
+</html>
+--}}
+    <!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>Test!</div>
 </body>
 </html>

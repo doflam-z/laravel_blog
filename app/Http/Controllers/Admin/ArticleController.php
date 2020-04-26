@@ -11,10 +11,14 @@ use App\Admin\Draft;
 
 class ArticleController extends Controller
 {
-    protected $article;
-    public function __construct(Article $article)
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $this->article=$article;
+        $this->middleware('auth');
     }
 
     //查看文章详情

@@ -18,16 +18,16 @@ Route::get('/', function () {
 });
 
 //test路由
-Route::any('/test','Admin\AdminController@test');
+Route::any('/test','TestController@test');
 Route::any('/page1','Admin\AdminController@page1');
 Route::any('/page2','Admin\AdminController@page2');
 Route::any('/page3','Admin\AdminController@page3');
 //------------------------------------------------------------------
 
 //Login
-Route::any('/login','LoginController@login');
+Route::any('/login','Admin\LoginController@login');
 //接收验证值
-Route::any('/login/ver','LoginController@ver');
+Route::any('/login/ver','Admin\LoginController@ver');
 
 //后台路由群组
 Route::group(['prefix' =>'admin'],function (){
@@ -88,3 +88,7 @@ Route::get('/list','Admin\AdminController@list');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

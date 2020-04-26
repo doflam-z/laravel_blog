@@ -13,20 +13,18 @@ use App\Admin\Comment;
 
 class AdminController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     //-----------------以下为测试部分-----------------------------
-    public function page1(Request $request)
-    {
-        $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(2);
-        return $data;
-    }
-    public function test()
-    {
-        $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(2);
-        return view('/test/test', [
-            'data' => $data,
-        ]);
-    }
+
     //-------------------以上为测试部分----------------------------
 
     //后台首页

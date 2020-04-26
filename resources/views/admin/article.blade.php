@@ -1,7 +1,7 @@
 {{--查看文章页面--}}
 {{--@extends('admin/public')--}}
 {{--@section('main_content')--}}
-    <div class="article_content">
+    <div class="article_content editormd-preview-container markdown-body ">
         {!! $article_content !!}
     </div>
     <form action="/comment/add" method="post">
