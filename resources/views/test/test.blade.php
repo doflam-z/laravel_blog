@@ -1,135 +1,119 @@
-{{--
-<html>
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/editormd/css/editormd.css" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
---}}
-{{--    <link rel="stylesheet" type="text/css" href="/css/style.css">--}}{{--
-
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
---}}
-{{--    <script src="/js/ajax.js"></script>--}}{{--
-
-
-
-    <title>Z_Blog</title>
 </head>
-
 <body>
+<div id="app">
+{{--    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
---}}
-{{--<section id='container'>
-    <noscript>
-        ... ...
-    </noscript>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
 
-    <ul class="menu">
-        <li><a href="/page1">page1</a></li>
-        <li><a href="/page2">page2</a></li>
-        <li><a href="/page3">page3</a></li>
-    </ul>
+                </ul>
 
-    <div class="content">
-        默认文字
-    </div>
-</section>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-<div>
-    <form action="/page1" method="post">
-        <input type="text" name="test1post">
-        <input type="submit" value="submit">
-    </form>
-</div>--}}{{--
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-
-<script>
-    $(document).ready(function(){
-
-        function anchorClick(link) {
-            // var linkSplit = link.split('/').pop();
-            $.post(link, {ajax:"1"}, function(data) {
-                $('.main-content').html(data);
-            });
-        }
-
-        $('.ajax').on('click', 'a', function(event) {
-            window.history.pushState(null, null, $(this).attr('href'));
-            anchorClick($(this).attr('href'));
-            event.preventDefault();
-            // event.stopPropagation()
-        });
-
-        window.addEventListener('popstate', function(e) {
-            let url=location.pathname + location.search;
-            anchorClick(url);
-        });
-    });
-
-</script>
-
-<div class="main-content">
-    <!-- 具体的内容 -->
-    @foreach($data as $value)
-        <div class='box_content px-2 py-4 border-bottom'><h5><a href='/article/edit/?table=Article&id={{$value->id}}'>{{$value->article_title}}</a></h5>
-            <div class='pt-3'>
-                <small><span class='span icon-clock2'>{{date('Y年m月d日',$value->article_time)}}</span></small>
-                <small><span class='span icon-eye'><small>{{$value->article_views}}</small></span></small>
-                <small><span class='span icon-bubble2'><small>{{$value->comment_num}}</small></span></small>
-                <div class='manage_button float-right'>
-                    <a href="/article/read?id={{$value->id}} " >查看</a> | <a href="/article/delete/?id={{$value->id}}" onclick="javascript:return p_del()" style="color: #e9322d">删除</a>
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
         </div>
-    @endforeach
+    </nav>--}}
+<!-- Right Side Of Navbar -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Authentication Links -->
+        @guest
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+        @else
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+        @endguest
+    </ul>
+
+    <main class="py-4">
+        @yield('content')
+    </main>
 </div>
-
-<!-- 分页 -->
-<div class="ajax page ajax-page">
---}}
-{{--    {{ $data->render() }}--}}{{--
-
-    <div class="mt-4">{{$data->links()}}</div>
-</div>
-
---}}
-{{--<script>
-    $('.ajax-page .pagination').find('a').each(function(e){
-        let page=$(this).attr('href').split('?')[1];
-        // $(this).removeAttr('href'); // 干掉href属性
-        $(this).attr('href',"javascript:;"); // 更改href属性
-        $(this).attr("onclick", "javascript:AjaxPage(\"" + page + "\")"); // 新增onclick事件
-    });
-</script>
-
-<script>
-    let url = "/page1?";
-    function AjaxPage(page) {
-        $.get(url + page, function (data) {
-            $('div.content').html(data);
-        })
-    }
-</script>--}}{{--
-
-
-
-</body>
-</html>
---}}
-    <!doctype html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<div>Test!</div>
 </body>
 </html>

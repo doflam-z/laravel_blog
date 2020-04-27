@@ -88,7 +88,7 @@ Route::get('/list','Admin\AdminController@list');
 
 
 
-
-Auth::routes();
+//['register'=>false],不允许注册
+Auth::routes(['register'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -4,9 +4,12 @@ html, body { height: 100%;width: 100%; padding: 0; margin: 0;font-family: "微�
 .content { height: 100%; width: 100%}
 .main {padding: 1.25rem 1.25rem;}
 .navbar input{padding: .875rem 1rem;background-color: #e6e8ea;border:none;}
-.nav-left{color: #e7eef5;font-size: 0.875rem;}
+.nav-left{color: #e7eef5;font-size: 0.875rem;letter-spacing:0.1rem;}
+.nav-left span{padding-left: 3rem}
 .nav-left img{position: relative;top: -0.1rem;}
 .nav-left:hover{color:#2c5786;background-color: #efefef}
+.edit{color: #9F9F9F}
+.edit:hover{color: #DCDCDC;text-decoration: none;}
 /*公共部分*/
 
 .span{color: #797979}

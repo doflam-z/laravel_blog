@@ -208,10 +208,10 @@ class AdminController extends Controller
 
     //最近文章列表
     public function list(){
-        $article_list=Article::select(['id','article_title'])->limit(6)->get();
+        $article_list=Article::select(['id','article_title'])->limit(10)->get();
         $list="";
         foreach($article_list as $value) {
-            $list.="<li class='list-group-item border-0 p-1'> <small><a class='cheak' href='/article/read?id=$value->id'> $value->article_title </a></small> </li >";
+            $list.="<li class='list-group-item border-0 p-1' style='background-color: #f8fafc'> <small><a class='cheak' href='/article/read?id=$value->id'> $value->article_title </a></small> </li >";
         }
         return $list;
     }
