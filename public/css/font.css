@@ -658,3 +658,18 @@
 .icon-windows8:before {
   content: "\eac2";
 }
+.icon-telegram:before {
+    content: "\ea95";
+}
+.icon-onedrive:before {
+    content: "\eaaf";
+}
+.icon-tux:before {
+    content: "\eabd";
+}
+.icon-steam:before {
+    content: "\eaac";
+}
+.icon-twitter:before {
+    content: "\ea96";
+}

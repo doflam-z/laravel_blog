@@ -43,6 +43,16 @@ class ArticleController extends Controller
             return $this->public_page();
         }
     }
+
+    //提取文章markdown文本
+    public function markdownContent(){
+        $data=Article::where('id','=','229')->select(['article_title','article_content'])->get();
+        foreach($data as $value)
+        $markdownContent=$value->article_content;
+        return $markdownContent;
+    }
+
+
     //发布、保存文章方法
     public function article_add(Request $request){
         $time=time();

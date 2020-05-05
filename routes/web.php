@@ -19,15 +19,15 @@ Route::get('/', function () {
 
 //test路由
 Route::any('/test','TestController@test');
-Route::any('/page1','Admin\AdminController@page1');
-Route::any('/page2','Admin\AdminController@page2');
+Route::any('/test2','Admin\ArticleController@markdownContent');
+Route::any('/test3','Admin\ArticleController@home');
 Route::any('/page3','Admin\AdminController@page3');
 //------------------------------------------------------------------
 
-//Login
+/*//Login
 Route::any('/login','Admin\LoginController@login');
 //接收验证值
-Route::any('/login/ver','Admin\LoginController@ver');
+Route::any('/login/ver','Admin\LoginController@ver');*/
 
 //后台路由群组
 Route::group(['prefix' =>'admin'],function (){
@@ -91,4 +91,9 @@ Route::get('/list','Admin\AdminController@list');
 //['register'=>false],不允许注册
 Auth::routes(['register'=>false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@archives');
+Route::get('/read', 'HomeController@read');
+Route::any('/search', 'HomeController@search');
+Route::get('/category', 'HomeController@category');
+Route::get('/inquire', 'HomeController@inquire');

@@ -8,10 +8,10 @@ class User extends Model
 {
     /*用户表模块*/
     //关联user数据表
-    protected $table='user';
+    protected $table='users';
     //定义禁止操作时间
     public $timestamps=false;
     //设置允许写入的字段
-    protected $fillable=['id','user_name','user_passwd','user_email','user_type'];
+    protected $fillable=['name','passwd','email'];
 
 }

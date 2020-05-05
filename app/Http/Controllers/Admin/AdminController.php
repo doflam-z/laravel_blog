@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 //引用的模块
 use App\Admin\User;
 use App\Admin\Article;
@@ -30,12 +31,7 @@ class AdminController extends Controller
     //后台首页
     public function admin(Request $request){
         if ($request->ajax) {
-/*        $total = Article::count();
-        $page = new Page($total, $listRows = 6, $query = "", $ord = true);
         $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
-        $fpage=$page->fpage(5);*/
-        $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
-//        return view('/admin/index', compact(['data', 'fpage']));
         return view('/admin/index', compact(['data']));
         }else{
             return $this->public_page();
@@ -87,10 +83,12 @@ class AdminController extends Controller
 
     //发表评论
     public function comment_add(Request $request){
+        $username=Auth::user()->name;
         $time=time();
-        $result=Comment::insert(['comment_content'=>"$request->comment_content",'article_id'=>"$request->article_id",'comment_time'=>"$time"]);
+        $result=Comment::insert(['comment_content'=>"$request->comment_content",'article_id'=>"$request->article_id",'comment_time'=>"$time",'username'=>"$username"]);
         if($result > 0){
-            return redirect("/admin#page=2");
+//            return redirect("/admin#page=2");
+            return back();
         }
     }
 
@@ -211,7 +209,7 @@ class AdminController extends Controller
         $article_list=Article::select(['id','article_title'])->limit(10)->get();
         $list="";
         foreach($article_list as $value) {
-            $list.="<li class='list-group-item border-0 p-1' style='background-color: #f8fafc'> <small><a class='cheak' href='/article/read?id=$value->id'> $value->article_title </a></small> </li >";
+            $list.="<li class='list-group-item border-0 p-1' style='background-color: #fdfdfd'> <small><a class='cheak' href='/article/read?id=$value->id'> $value->article_title </a></small> </li >";
         }
         return $list;
     }
