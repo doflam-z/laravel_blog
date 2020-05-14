@@ -6,8 +6,10 @@ use App\Admin\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin\Article;
-use App\Admin\Comment;
+use App\Comment;
+use App\Post;
 use App\Admin\Draft;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -37,8 +39,9 @@ class ArticleController extends Controller
         $admin=new AdminController();
         $article_content=$parser->makeHtml($text);
         $article_title=$value->article_title;
-        $comment=Comment::where('article_id','=',"$id")->get();
-        return view('/admin/article',compact(['article_title','article_content','comment','id']));
+        $comment=Comment::where('article_id','=',"$id")->where('reply_id','=',null)->get();
+        $second_comment=Comment::where('article_id','=',"$id")->where('reply_id','!=',null)->get();
+        return view('/admin/article',compact(['article_title','article_content','comment','second_comment','id']));
         }else{
             return $this->public_page();
         }
@@ -60,9 +63,9 @@ class ArticleController extends Controller
         $article_content = $this->articleChang($article_content);
         if (isset($request->publish)){
             if ($request->publish =='edit'){
-                $result= Article::where('id','=',"$request->id")->update(['article_title' => "$request->article_title", 'article_content' => "$article_content", 'cate_name' => "$request->category", 'article_time' => "$time"]);
+                $result= Post::where('id','=',"$request->id")->update(['title' => "$request->article_title", 'content' => "$article_content", 'cate_name' => "$request->category", 'created_at' => "$time"]);
             }elseif ($request->publish =='publish') {
-                $result = Article::insert(['article_title' => "$request->article_title", 'article_content' => "$article_content", 'cate_name' => "$request->category", 'article_time' => "$time"]);
+                $result = Post::insert(['created_at'=>$time ,'title' => "$request->article_title", 'content' => "$article_content", 'cate_name' => "$request->category",'user_id'=>Auth::id() ]);
             }
             if ($result > 0){
                 return redirect('/admin');
@@ -81,17 +84,17 @@ class ArticleController extends Controller
 
     //新增、修改文章页面
     public function article_edit(Request $request){
-        $field=['article_title','article_content'];
+        $field=['title','content'];
         if (isset($request->id)){
             $id=$request->id;
             if ($request->table == "Draft"){
                 $data=Draft::where('id','=',"$id")->select($field)->get();
             }else{
-                $data=Article::where('id','=',"$id")->select($field)->get();
+                $data=Post::where('id','=',"$id")->select($field)->get();
             }
             foreach ($data as $value)
-            $article_content=$value->article_content;
-            $article_title=$value->article_title;
+            $article_content=$value->content;
+            $article_title=$value->title;
             $sub="edit";
             $id=$request->id;
         }else{
@@ -106,7 +109,7 @@ class ArticleController extends Controller
 
     //删除文章
     public function article_delete(Request $request){
-        $data= Article::where('id','=',"$request->id")->delete();
+        $data= Post::where('id','=',"$request->id")->delete();
         if ($data > 0) {
             return redirect('/admin');
         }else{return false;}

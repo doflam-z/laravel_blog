@@ -30,19 +30,57 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-dark flex-md-nowrap p-0 shadow ">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <div class="row w-100">
-                <a class="navbar-brand col-sm-3 col-md-2 ml-auto" href="{{ url('/') }}" style="font-size: 1.6rem;color: #5f5f5f;"> <img src="image/joker.jpg" style="width: 40px;height: 40px; border-radius: 50%;"> Zany</a>
-                <div class="col-md-6 mr-0 pr-0"></div>
-                <div class="dropdown col-sm-3 col-md-2 mr-auto text-right ml-0 pl-0" style="line-height: 52px;">
-                    <button type="button" class="btn btn-primary dropdown-toggle button_nav" data-toggle="dropdown">
-                        Catergory
+                <a class="navbar-brand col-sm-3 col-md-5 ml-auto pt-0" href="{{ url('/') }}" style="font-size: 1.6rem;color: #5f5f5f;"> <img src="/image/joker.jpg" style="width: 40px;height: 40px; border-radius: 50%;">
+                    Zany
+                </a>
+                <div class="col-sm-3 col-md-5 mr-auto">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right cate_list" style="width: 100px;">
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto">
+
+                        </ul>
+
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </nav>
@@ -53,14 +91,14 @@
     <footer class="w-100 border-top" style="height: 130px;">
         <div class="container mt-4">
             <div class="row">
-                <div class="col-md-5 ml-auto">
-                    <a href="#" class="footer_a">About</a>
+                <div class="col-md-5 ml-auto">-
+                    <a href="/about" class="footer_a">About</a>
                 </div>
                 <div class="col-md-5 mr-auto">
                     <div class="ml-5">
-                        <span class="icon-youtube d-block mb-2 footer_a">&nbsp;<a class="footer_a" href="#" >Youte</a></span>
-                        <span class="icon-twitter d-block mb-2 footer_a">&nbsp;<a class="footer_a" href="#">Twitter</a></span>
-                        <span class="icon-telegram d-block mb-2 footer_a">&nbsp;<a class="footer_a" href="#">Telegram</a></span>
+                        <span class="icon-github d-block mb-3 footer_a">&nbsp;<a class="footer_a" href="https://github.com/doflam-z">github</a></span>
+                        <span class="icon-blogger2 d-block mb-3 footer_a">&nbsp;<a class="footer_a" href="https://blog.csdn.net/qq_43308140" >CSDN</a></span>
+                        <span class="icon-telegram d-block mb-3 footer_a">&nbsp;<a class="footer_a" href="https://web.telegram.org/#/login">telegram</a></span>
                     </div>
                 </div>
             </div>
@@ -124,6 +162,21 @@
 $(document).ready(function(){
     $('.cate_list').load("/category");
 })
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        reply=function($id){
+            if($('#reply'+$id ).is(':hidden')){
+                $('#reply'+$id).fadeIn(500);
+                $('#click_event'+$id).text('取消回复');
+            }
+            else{
+                $('#reply'+$id).fadeOut(200);
+                $('#click_event'+$id).text('回复');
+            }
+        }
+    })
 </script>
 </body>
 </html>

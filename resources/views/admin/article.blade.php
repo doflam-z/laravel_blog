@@ -11,7 +11,22 @@
     </form>
     @foreach($comment as $value)
         <div class="py-3 border-bottom">
-            <span class="icon-user-tie">用户</span> <b style="color: #645FF7">{{$value->username}}</b> <small style="color: #95908C">{{date('Y年m月d号 H:i:s',$value->comment_time)}}</small> : {{$value->comment_content}}
+            <div>
+                <a style="color: #2C3238;font-size: 1.4rem;">{{$value->username}}</a>
+                <small style="color: #95908C">{{date('Y-m-d H:i:s',$value->time)}}</small>
+                <a href="/?id={{$value->id}}" style=";">回复</a>
+            </div>
+            <p class="mb-0" style="font-size: 1.2rem;">{{$value->content}}</p>
+            <div class="ml-3 pl-2 border-left">
+                @foreach($second_comment as $value2)
+                    <div>
+                        <a style="color: #2C3238;font-size: 1.4rem;">{{$value2->username}}</a>
+                        <small style="color: #95908C">{{date('Y-m-d H:i:s',$value2->time)}}</small>
+                        <a href="/?id={{$value2->id}}" style=";">回复</a>
+                    </div>
+                    <p class="mb-0" style="font-size: 1.2rem;">{{$value2->content}}</p>
+                @endforeach
+            </div>
         </div>
     @endforeach
 {{--@endsection--}}

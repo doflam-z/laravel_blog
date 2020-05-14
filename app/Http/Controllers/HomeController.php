@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Admin\Article;
 use App\Admin\Category;
-use App\Admin\Comment;
+use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,10 +15,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+/*    public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
@@ -30,16 +31,16 @@ class HomeController extends Controller
     }
     //查看所有文章列表
     public function archives(){
-            $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(14);
+            $data=Post::select(['id','title','created_at'])->paginate(14);
             return view('/home/archives', compact(['data']));
     }
     //查看文章
     public function read(Request $request)
     {
         $id=$request->id;
-        $field=['article_title','article_content','article_time'];
+        $field=['title','content','created_at'];
         $comment=Comment::where('article_id','=',"$id")->get();
-        $data=Article::where('id','=',"$request->id")->select($field)->get();
+        $data=Post::where('id','=',"$request->id")->select($field)->get();
         return view('home',compact(['data','comment','id']));
     }
 
@@ -65,7 +66,7 @@ class HomeController extends Controller
     }
     //查询分类下的文章
     public function inquire(Request $request){
-        $data=Article::where('cate_name','=',"$request->cate_name")->select(['id','article_title','article_time','cate_name'])->paginate(14);
+        $data=Post::where('cate_name','=',"$request->cate_name")->select(['id','title','created_at','cate_name'])->paginate(14);
         if ($data->first() !== null){
             foreach ($data as $value)
                 $cate_name = $value->cate_name;

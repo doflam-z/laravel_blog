@@ -1,29 +1,3 @@
-{{--
-@extends('layouts.app')
-
-@section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        You are logged in!
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
---}}
-
 @extends('layouts.home')
 
 @section('content')
@@ -31,27 +5,29 @@
             <div class="row w-100">
                 <div class="col-md-10 m-auto">
                     <div class='article_title px-2 py-4 border-bottom'>
-                        @foreach($data as $value)@endforeach
-                        <h3 class="" style="color: #4D4D4D"><b>{{$value->article_title}}</b></h3>
+                        <h3 class="" style="color: #4D4D4D"><b>{{$post->title}}</b></h3>
                         <div class='pt-1'>
-                            <small>{{date('Y-m-d',$value->article_time)}}</small>
+                            <small>{{$post->created_at}}</small>
                         </div>
                     </div>
-                    <div id="test-editormd-view2" class="p-1">
-                        <textarea style="display:none;" name="test-editormd-markdown-doc">{{$value->article_content}}</textarea>
+                    <div id="test-editormd-view2" class="p-1 border-bottom pb-4">
+                        <textarea style="display:none;" name="test-editormd-markdown-doc">{{$post->content}}</textarea>
                     </div>
-                    <div class="comment mt-3">
-                        <form class="w-100" action="/comment/add" method="post">
-                            <textarea class="form-control" rows="3" name="comment_content"></textarea>
-                            <button class="btn btn-primary mt-2" name="comment_sub" type="submit" value="">评论</button>
-                            <input name="article_id" type="hidden" value="{{$id}}">
+                    <div class="mt-4">
+                        @if($comments !== '')
+                            @include('comments.list',['collections'=>$comments['root']])
+                        @endif
+
+                        <h3>留下您的评论</h3>
+                        <form method="POST" action="{{url('post/'.$post->id.'/comments')}}" accept-charset="UTF-8">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <label for="body" class="control-label">Info:</label>
+                                <textarea id="body" name="body"  class="form-control" required="required"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">回复</button>
                         </form>
                     </div>
-                    @foreach($comment as $value)
-                        <div class="py-3">
-                            <span class="icon-user-tie">用户</span> <b style="color: #645FF7">{{$value->username}}</b> <small style="color: #95908C">{{date('Y年m月d号 H:i:s',$value->comment_time)}}</small> : {{$value->comment_content}}
-                        </div>
-                    @endforeach
                 </div>
             </div>
     </div>

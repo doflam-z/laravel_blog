@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 //引用的模块
-use App\Admin\User;
+use App\User;
 use App\Admin\Article;
 use App\Admin\Draft;
 use App\Admin\Category;
-use App\Admin\Comment;
+use App\Comment;
+use App\Post;
 
 class AdminController extends Controller
 {
@@ -21,17 +22,13 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role');
     }
-
-    //-----------------以下为测试部分-----------------------------
-
-    //-------------------以上为测试部分----------------------------
 
     //后台首页
     public function admin(Request $request){
         if ($request->ajax) {
-        $data=Article::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
+        $data=Post::select(['id','title','created_at'])->paginate(6);
         return view('/admin/index', compact(['data']));
         }else{
             return $this->public_page();
@@ -71,7 +68,8 @@ class AdminController extends Controller
     //草稿管理
     public function draft(Request $request){
         if ($request->ajax) {
-            $data=Draft::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
+//            $data=Draft::select(['id','article_title','article_editor','article_time','comment_num','article_views'])->paginate(6);
+            $data=Draft::select(['id','title','created_at'])->paginate(6);
             return view('/admin/draft',compact(['data']));
         }else{
             return $this->public_page();
@@ -85,7 +83,7 @@ class AdminController extends Controller
     public function comment_add(Request $request){
         $username=Auth::user()->name;
         $time=time();
-        $result=Comment::insert(['comment_content'=>"$request->comment_content",'article_id'=>"$request->article_id",'comment_time'=>"$time",'username'=>"$username"]);
+        $result=Comment::insert(['content'=>"$request->comment_content",'article_id'=>"$request->article_id",'time'=>"$time",'username'=>"$username"]);
         if($result > 0){
 //            return redirect("/admin#page=2");
             return back();
@@ -206,17 +204,17 @@ class AdminController extends Controller
 
     //最近文章列表
     public function list(){
-        $article_list=Article::select(['id','article_title'])->limit(10)->get();
+        $article_list=Post::select(['id','title'])->limit(10)->get();
         $list="";
         foreach($article_list as $value) {
-            $list.="<li class='list-group-item border-0 p-1' style='background-color: #fdfdfd'> <small><a class='cheak' href='/article/read?id=$value->id'> $value->article_title </a></small> </li >";
+            $list.="<li class='list-group-item border-0 p-1' style='background-color: #fdfdfd'> <small><a onclick=\"javascript:stop_ajax();\" class='cheak' href='/article/edit?id=$value->id'> $value->title </a></small> </li >";
         }
         return $list;
     }
 
     //网站信息栏
     public function info(){
-        $articles=Article::select(['id'])->count();
+        $articles=Post::select(['id'])->count();
         $article_views=Article::sum('article_views');
         $article_comments=Comment::select(['id'])->count();
         $users=User::select(['id'])->count();
