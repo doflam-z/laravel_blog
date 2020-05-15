@@ -79,12 +79,14 @@ Route::get('/list','Admin\AdminController@list');
 //['register'=>false],不允许注册
 Auth::routes(['register'=>true]);
 
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@archives');
+Route::get('/', 'HomeController@index');
 Route::get('/read', 'HomeController@read');
-Route::any('/search', 'HomeController@search');
+//Route::any('/search', 'HomeController@search');
 Route::get('/category', 'HomeController@category');
 Route::get('/inquire', 'HomeController@inquire');
+Route::get('/post/show/{post}','HomeController@show' );
+Route::post('/post/{post}/comments','HomeController@comment' );
+
 Route::get('/about', function () {
     return view('home/about');
 });
@@ -94,33 +96,4 @@ Route::get('/prompt', function () {
 Route::get('/comment_add', function () {
     return view('admin/comment_add');
 });
-
-
-//------------------------------------------------------
-Route::get('/post/show/{post}', function (\App\Post $post) {
-    $post->load('comments.owner');
-    $comments = $post->getComments();
-    if($comments->count()!==0) {
-        $comments['root'] = $comments[''];
-        unset($comments['']);
-    }else{
-        $comments='';
-    }
-    return view('home', compact('post', 'comments'));
-});
-
-//用户进行评论
-Route::post('post/{post}/comments', function (\App\Post $post) {
-    if(\Auth::check()) {
-        $post->comments()->create([
-            'body' => request('body'),
-            'user_id' => \Auth::id(),
-            'parent_id' => request('parent_id', null),
-        ]);
-        return back();
-    }else{
-        return redirect('login');
-    }
-});
-
 

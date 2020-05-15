@@ -9,5 +9,5 @@
         <label for="body" class="control-label">Info:</label>
         <textarea id="body" name="body"  class="form-control" required="required"></textarea>
     </div>
-    <button type="submit" class="btn btn-success">回复</button>
+    <button type="submit" class="btn btn-primary">回复</button>
 </form>

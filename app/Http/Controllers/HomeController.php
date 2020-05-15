@@ -25,26 +25,40 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
-    }
     //查看所有文章列表
-    public function archives(){
+    public function index(){
             $data=Post::select(['id','title','created_at'])->paginate(14);
-            return view('/home/archives', compact(['data']));
+            return view('/home/index', compact(['data']));
     }
     //查看文章
-    public function read(Request $request)
+    public function show(\App\Post $post)
     {
-        $id=$request->id;
-        $field=['title','content','created_at'];
-        $comment=Comment::where('article_id','=',"$id")->get();
-        $data=Post::where('id','=',"$request->id")->select($field)->get();
-        return view('home',compact(['data','comment','id']));
+        $post->load('comments.owner');
+        $comments = $post->getComments();
+        if($comments->count()!==0) {
+            $comments['root'] = $comments[''];
+            unset($comments['']);
+        }else{
+            $comments='';
+        }
+        return view('/home/article', compact('post', 'comments'));
+    }
+    //评论文章
+    public function comment(\App\Post $post)
+    {
+        if(\Auth::check()) {
+            $post->comments()->create([
+                'body' => request('body'),
+                'user_id' => \Auth::id(),
+                'parent_id' => request('parent_id', null),
+            ]);
+            return back();
+        }else{
+            return redirect('login');
+        }
     }
 
-    //搜索
+/*    //搜索
     public function search(Request $request)
     {
         if ($request->search_content == ""){
@@ -53,7 +67,7 @@ class HomeController extends Controller
         $str=trim($request->search_content);
         $data=Article::where('article_title','like',"%$str%")->select(['id','article_title','article_editor','article_time','comment_num','article_views'])->get();
         return view('/home/search',compact(['data','str']));
-    }
+    }*/
 
     //输出分类列表
     public function category(){
