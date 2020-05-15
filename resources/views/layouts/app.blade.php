@@ -91,12 +91,12 @@
     <footer class="w-100 border-top" style="height: 130px;">
         <div class="container mt-4">
             <div class="row">
-                <div class="col-12 col-md-2 ml-auto mb-2">
-                    <span class=""><a href="/" class="d-block footer_a ml-5 mb-1">Zany</a></span>
-                    <span><a href="/about" class="d-block footer_a ml-5">About</a></span>
+                <div class="col-12 col-md-5 ml-auto mb-2">
+                    <span class=""><a href="/" class="d-block footer_a mb-1">Zany</a></span>
+                    <span><a href="/about" class="d-block footer_a">About</a></span>
                 </div>
-                <div class="col-12 col-md-3 mr-auto">
-                    <div class="ml-5">
+                <div class="col-12 col-md-5 mr-auto">
+                    <div class="">
                         <span class="icon-github d-block mb-3 footer_a">&nbsp;<a class="footer_a" href="https://github.com/doflam-z">github</a></span>
                         <span class="icon-blogger2 d-block mb-3 footer_a">&nbsp;<a class="footer_a" href="https://blog.csdn.net/qq_43308140" >CSDN</a></span>
                         <span class="icon-telegram d-block mb-3 footer_a">&nbsp;<a class="footer_a" href="https://web.telegram.org/#/login">telegram</a></span>
