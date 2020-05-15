@@ -33,10 +33,10 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <div class="row w-100">
-                <a class="navbar-brand col-sm-3 col-md-5 ml-auto pt-0" href="{{ url('/') }}" style="font-size: 1.6rem;color: #5f5f5f;"> <img src="/image/joker.jpg" style="width: 40px;height: 40px; border-radius: 50%;">
+                <a class="navbar-brand col-8 col-md-5 ml-auto pt-0" href="{{ url('/') }}" style="font-size: 1.6rem;color: #5f5f5f;"> <img src="/image/joker.jpg" style="width: 40px;height: 40px; border-radius: 50%;">
                     Zany
                 </a>
-                <div class="col-sm-3 col-md-5 mr-auto">
+                <div class="col-2 col-md-5 mr-auto">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>

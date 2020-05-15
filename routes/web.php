@@ -122,3 +122,5 @@ Route::post('post/{post}/comments', function (\App\Post $post) {
         return redirect('login');
     }
 });
+
+

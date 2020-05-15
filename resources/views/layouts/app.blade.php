@@ -17,8 +17,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- markdown -->
-    <link rel="stylesheet" href="{{ asset('editormd/examples/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('editormd/css/editormd.preview.css') }}" />
+{{--    <link rel="stylesheet" href="{{ asset('editormd/examples/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('editormd/css/editormd.preview.css') }}" />--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -81,7 +81,7 @@
         </main>
     </div>
 
-    <script src="{{asset('editormd/examples/js/jquery.min.js')}}"></script>
+{{--    <script src="{{asset('editormd/examples/js/jquery.min.js')}}"></script>
     <script src="{{asset('editormd/lib/marked.min.js')}}"></script>
     <script src="{{asset('editormd/lib/prettify.min.js')}}"></script>
 
@@ -132,6 +132,6 @@
                         sequenceDiagram : true,  // 默认不解析
                     });*/
         });
-    </script>
+    </script>--}}
 </body>
 </html>
