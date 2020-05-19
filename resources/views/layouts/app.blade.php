@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/font.css">
+    <link rel="styles heet" type="text/css" href="/css/font.css">
 </head>
 <body>
 <div id="app">

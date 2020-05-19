@@ -215,7 +215,8 @@ class AdminController extends Controller
     //网站信息栏
     public function info(){
         $articles=Post::select(['id'])->count();
-        $article_views=Article::sum('article_views');
+//        $article_views=Article::sum('article_views');
+        $article_views='12';
         $article_comments=Comment::select(['id'])->count();
         $users=User::select(['id'])->count();
         $info=array('articles'=>"$articles",'article_views'=>"$article_views",'article_comments'=>"$article_comments",'users'=>"$users");

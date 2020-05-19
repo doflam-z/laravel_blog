@@ -41,13 +41,18 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        session(['link' => url()->previous()]);
+        if (session('is_comment') == true) {
+            session(['link' => url()->previous()]);
+        }else{
+            session(['link' => '/admin']);
+        }
         return view('auth.login');
     }
 
 
     protected function authenticated(Request $request, $user)
     {
+//        return redirect('/');
         return redirect(session('link'));
     }
 }

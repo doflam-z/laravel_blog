@@ -54,6 +54,7 @@ class HomeController extends Controller
             ]);
             return back();
         }else{
+            session(['is_comment' => true]);
             return redirect('login');
         }
     }
@@ -85,7 +86,7 @@ class HomeController extends Controller
             foreach ($data as $value)
                 $cate_name = $value->cate_name;
         }else{$cate_name="";}
-        return view('/home/archives', compact(['data','cate_name']));
+        return view('/home/index', compact(['data','cate_name']));
     }
 
 }
