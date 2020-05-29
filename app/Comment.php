@@ -21,6 +21,11 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function article()
+    {
+        return $this->belongsTo(Post::class, 'post_id');
+    }
+
     /**
      * 这个评论的子评论
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

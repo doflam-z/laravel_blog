@@ -1,4 +1,4 @@
-<form id="reply{{$parentId}}" method="POST" action="{{url('post/'.$post->id.'/comments')}}" accept-charset="UTF-8" style="display: none">
+<form id="reply{{$parentId}}" method="POST" action="{{url('post/'.$comment->post_id.'/comments')}}" accept-charset="UTF-8" style="display: none">
     {{csrf_field()}}
 
     @if(isset($parentId))

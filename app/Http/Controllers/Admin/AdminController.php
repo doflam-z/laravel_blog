@@ -35,11 +35,28 @@ class AdminController extends Controller
         }
     }
 
+    public function test(){
+            $comments = Comment::get()->groupBy('parent_id');
+            if($comments->count()!==0) {
+                $comments['root'] = $comments[''];
+                unset($comments['']);
+            }else{
+                $comments='';
+            }
+//        dd($comments);
+            return view('/admin/comment', compact(['comments']));
+    }
     //评论管理
     public function comment(Request $request){
         if ($request->ajax) {
-            $data = Comment::get();
-            return view('/admin/comment', compact(['data']));
+            $comments = Comment::get()->groupBy('parent_id');
+            if($comments->count()!==0) {
+                $comments['root'] = $comments[''];
+                unset($comments['']);
+            }else{
+                $comments='';
+            }
+            return view('/admin/comment', compact(['comments']));
         }else{
             return $this->public_page();
         }

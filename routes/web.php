@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/test','Admin\AdminController@test');
 //后台路由群组
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' =>'admin'],function (){
@@ -84,6 +84,7 @@ Route::get('/read', 'HomeController@read');
 //Route::any('/search', 'HomeController@search');
 Route::get('/category', 'HomeController@category');
 Route::get('/inquire', 'HomeController@inquire');
+
 Route::get('/post/show/{post}','HomeController@show' );
 Route::post('/post/{post}/comments','HomeController@comment' );
 

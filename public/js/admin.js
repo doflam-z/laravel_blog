@@ -90,6 +90,9 @@ $(document).ready(function(){
     });
 
 
+    /**
+     * 不使用ajax时调用的方法
+     */
     stop_ajax = function(){
         $(".ajax").off("click","a");
     }
@@ -122,15 +125,20 @@ function p_del() {
     }
 }
 
-/*//ajax分页
-function setPage(url) {
-    // let link = url.split('?').pop();
-    $.post(url,{ajax:"1"},function(data){
-        $('.main-content').html(data);
-    });
-}
-// setPage('/admin/article?page=1');*/
 
-//---------------------------------------------
-
+/**
+ *
+ */
+$(function(){
+    reply=function($id){
+        if($('#reply'+$id ).is(':hidden')){
+            $('#reply'+$id).fadeIn(500);
+            $('#click_event'+$id).text('取消回复');
+        }
+        else{
+            $('#reply'+$id).fadeOut(200);
+            $('#click_event'+$id).text('回复');
+        }
+    }
+})
 
