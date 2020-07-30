@@ -1,5 +1,6 @@
 ## 该博客项目基于laravel框架，前端使用bootstrap开发。
 #### 软件版本：laravel 7.0 、bootstrap 4
+#### 基础环境：lnmp，nginx 1.2 mysql 5.7 php5.6
 ### 功能介绍
 
 **前台页面**
