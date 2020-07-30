@@ -1,4 +1,5 @@
-## 该博客项目基于laravel 7框架，前端使用bootstrap 4开发。
+## 该博客项目基于laravel框架，前端使用bootstrap开发。
+#### 软件版本：laravel 7.0 、bootstrap 4
 ### 功能介绍
 
 **前台页面**
